@@ -23,16 +23,16 @@ const handleCardClick = (event, isRightClick) => {
     const currentRotation = cardClicked.dataset.rotation
     let newRotation = `${Number(currentRotation) + direction}`
 
-    if(newRotation === "4") {
+    if (newRotation === "4") {
       newRotation = "0"
     }
 
-    if(newRotation === "-1") {
+    if (newRotation === "-1") {
       newRotation = "3"
     }
 
     let t = document.querySelector('#' + cardClicked.id + " div").style.transform;
-    if(!t) {
+    if (!t) {
       t = "rotate(0deg)";
     }
 
@@ -40,7 +40,7 @@ const handleCardClick = (event, isRightClick) => {
     n += isRightClick ? -90 : 90;
 
     let isCorrect = false;
-    if(n % 360 === 0) {
+    if (n % 360 === 0) {
       isCorrect = true;
     }
 
@@ -58,14 +58,17 @@ const handleCardClick = (event, isRightClick) => {
       document.getElementById('board').classList.add("finished");
       winAnimation()
     } else {
-      if(isCorrect) {
-        setTimeout(() => {
-          if(document.querySelector('#' + cardClicked.id + " div").style.transform === `rotate(${n}deg)`) {
+      cardClicked.classList.add("loading");
+      setTimeout(() => {
+        cardClicked.classList.remove("loading");
+
+        if (isCorrect) {
+          if (document.querySelector('#' + cardClicked.id + " div").style.transform === `rotate(${n}deg)`) {
             console.log("Done");
             cardClicked.disabled = true;
           }
-        }, 1000);
-      }
+        }
+      }, 1000);
     }
   }
 }
@@ -75,13 +78,13 @@ const setupBoard = (puzzle, size = 4) => {
 
   const renderCard = (x, y, data) => {
     let rotation = 0;
-    if(data == 0) {
+    if (data == 0) {
       rotation = 0;
-    } else  if(data == 1) {
+    } else if (data == 1) {
       rotation = 90;
-    } else  if(data == 2) {
+    } else if (data == 2) {
       rotation = 180;
-    } else  if(data == 3) {
+    } else if (data == 3) {
       rotation = 270;
     }
 

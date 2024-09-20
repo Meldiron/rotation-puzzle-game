@@ -58,6 +58,14 @@ html, body {
   opacity: 0.8;
 }
 
+#board .imageFragment {
+  opacity: 1;
+}
+
+#board .loading .imageFragment {
+  opacity: 0.7 !important;
+}
+
 #board {
   z-index: 999;
   border-radius: 16px;
