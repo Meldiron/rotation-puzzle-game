@@ -2,18 +2,14 @@
 <html lang="en"><head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daniel’s rotation puzzle game</title>
+  <title>Rotation puzzle game</title>
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" type="image/png" href="./assets/favicon.jpg" />
 </head><body draggable="false">
-  <div id="board"></div>
-  <div id="pointer">
-    <img
-      class="hidden"
-      src="./assets/pointing-hand.webp"
-      draggable="false"
-    />
+  <div id="wrapper">
+    <div id="board"></div>
   </div>
-  <script src="./pointer.js"></script>
+  <canvas id="confetti"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
   <script src="./game.js"></script>
 </body></html>
