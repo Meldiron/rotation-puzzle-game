@@ -50,8 +50,16 @@ html, body {
 
 }
 
-#board.finished {
+#board button {
   filter: drop-shadow(0px 0px 10px #4b5563);
+}
+
+#board button {
+  background-color: black;
+}
+
+#board button:not(:disabled):not(.finished) .imageFragment {
+  opacity: 0.8;
 }
 
 #board {

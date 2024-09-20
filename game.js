@@ -9,12 +9,6 @@ const voiceFiles = {
   ]
 }
 
-const playSound = (type = 'flip') => {
-  const voiceFile = getRandomElementFromArray(voiceFiles[type])
-  const audio = new Audio(`./assets/sound/${voiceFile}.mp3`)
-  audio.play()
-}
-
 const handleCardClick = (event, isRightClick) => {
   event.preventDefault()
 
@@ -23,8 +17,6 @@ const handleCardClick = (event, isRightClick) => {
   )
 
   if (!cardClicked.disabled) {
-
-    playSound('flip')
 
     const direction = isRightClick ? -1 : 1;
 
@@ -46,6 +38,12 @@ const handleCardClick = (event, isRightClick) => {
 
     let n = +(t.split("(")[1].split("deg")[0]);
     n += isRightClick ? -90 : 90;
+
+    let isCorrect = false;
+    if(n % 360 === 0) {
+      isCorrect = true;
+    }
+
     document.querySelector('#' + cardClicked.id + " div").style.transform = `rotate(${n}deg)`;
 
     cardClicked.dataset.rotation = newRotation
@@ -59,12 +57,21 @@ const handleCardClick = (event, isRightClick) => {
       })
       document.getElementById('board').classList.add("finished");
       winAnimation()
+    } else {
+      if(isCorrect) {
+        setTimeout(() => {
+          if(document.querySelector('#' + cardClicked.id + " div").style.transform === `rotate(${n}deg)`) {
+            console.log("Done");
+            cardClicked.disabled = true;
+          }
+        }, 1000);
+      }
     }
   }
 }
 
 const setupBoard = (puzzle, size = 4) => {
-  const getRandomRotation = () => Math.floor(Math.random() * 4)
+  const getRandomRotation = () => Math.floor(Math.random() * 3) + 1
 
   const renderCard = (x, y, data) => {
     let rotation = 0;
