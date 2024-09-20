@@ -51,10 +51,6 @@ html, body {
 }
 
 #board button {
-  filter: drop-shadow(0px 0px 10px #4b5563);
-}
-
-#board button {
   background-color: black;
 }
 
