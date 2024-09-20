@@ -65,25 +65,24 @@ const handleCardClick = (event, isRightClick) => {
 
 const setupBoard = (puzzle, size = 4) => {
   const getRandomRotation = () => Math.floor(Math.random() * 4)
-  const result = getRandomRotation()
 
-  let rotation = 0;
+  const renderCard = (x, y, data) => {
+    let rotation = 0;
+    if(data == 0) {
+      rotation = 0;
+    } else  if(data == 1) {
+      rotation = 90;
+    } else  if(data == 2) {
+      rotation = 180;
+    } else  if(data == 3) {
+      rotation = 270;
+    }
 
-  if(result == 0) {
-    rotation = 0;
-  } else  if(result == 1) {
-    rotation = 90;
-  } else  if(result == 2) {
-    rotation = 180;
-  } else  if(result == 3) {
-    rotation = 270;
-  }
-
-  const renderCard = (x, y) => `
+    return `
     <button
       id="if_${x}_${y}"
       class="card"
-      data-rotation="${result}"
+      data-rotation="${data}"
       style="
         width: ${(80 / size)}vmin;
         height: ${(80 / size)}vmin;
@@ -99,7 +98,8 @@ const setupBoard = (puzzle, size = 4) => {
         "
       ></div>
     </button>
-  `
+    `
+  }
 
 
   const renderRow = children => `
@@ -109,7 +109,7 @@ const setupBoard = (puzzle, size = 4) => {
   const boardHTML = indices.map(rowIndex => (
     renderRow(
       indices.map(columnIndex => (
-        renderCard(rowIndex, columnIndex)
+        renderCard(rowIndex, columnIndex, getRandomRotation())
       )).join('')
     )
   )).join('')
